@@ -222,8 +222,21 @@ public:
     
     
     
-    std::pair<iterator, bool> insert(const value_type& value) { return m_ht.insert(value); }
-    std::pair<iterator, bool> insert(value_type&& value) { return m_ht.insert(std::move(value)); }
+    std::pair<iterator, bool> insert(const value_type& value) { 
+        return m_ht.insert(value); 
+    }
+    
+    std::pair<iterator, bool> insert(const value_type& value, std::size_t precalculated_hash) { 
+        return m_ht.insert(value, precalculated_hash); 
+    }
+    
+    std::pair<iterator, bool> insert(value_type&& value) { 
+        return m_ht.insert(std::move(value)); 
+    }
+    
+    std::pair<iterator, bool> insert(value_type&& value, std::size_t precalculated_hash) { 
+        return m_ht.insert(std::move(value), precalculated_hash); 
+    }    
     
     iterator insert(const_iterator hint, const value_type& value) { return m_ht.insert(hint, value); }
     iterator insert(const_iterator hint, value_type&& value) { return m_ht.insert(hint, std::move(value)); }
