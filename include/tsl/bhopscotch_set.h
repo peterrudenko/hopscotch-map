@@ -238,12 +238,25 @@ public:
         return m_ht.insert(std::move(value), precalculated_hash); 
     }    
     
-    iterator insert(const_iterator hint, const value_type& value) { return m_ht.insert(hint, value); }
-    iterator insert(const_iterator hint, value_type&& value) { return m_ht.insert(hint, std::move(value)); }
     
-    template<class InputIt>
-    void insert(InputIt first, InputIt last) { m_ht.insert(first, last); }
-    void insert(std::initializer_list<value_type> ilist) { m_ht.insert(ilist.begin(), ilist.end()); }
+    iterator insert(const_iterator hint, const value_type& value) { 
+        return m_ht.insert(hint, value); 
+    }
+    
+    iterator insert(const_iterator hint, value_type&& value) { 
+        return m_ht.insert(hint, std::move(value)); 
+    }
+    
+    
+    template<class InputIt,
+             typename std::enable_if<tsl::detail_hopscotch_hash::is_iterator<InputIt>::value>::type* = nullptr>
+    void insert(InputIt first, InputIt last) { 
+        m_ht.insert(first, last); 
+    }
+    
+    void insert(std::initializer_list<value_type> ilist) { 
+        m_ht.insert(ilist.begin(), ilist.end()); 
+    }
 
     
     

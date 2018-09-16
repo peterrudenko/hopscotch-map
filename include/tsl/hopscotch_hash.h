@@ -100,6 +100,15 @@ struct is_power_of_two_policy<tsl::hh::power_of_two_growth_policy<GrowthFactor>>
 };
 
 
+template<typename T, typename = void>
+struct is_iterator: std::false_type {
+};
+
+template<typename T>
+struct is_iterator<T, typename std::enable_if<!std::is_same<typename std::iterator_traits<T>::iterator_category, 
+                                                            void>::value>::type>: std::true_type 
+{
+};
 
 
 

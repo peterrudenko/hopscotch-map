@@ -280,7 +280,8 @@ public:
     }
     
     
-    template<class InputIt>
+    template<class InputIt, 
+             typename std::enable_if<tsl::detail_hopscotch_hash::is_iterator<InputIt>::value>::type* = nullptr>
     void insert(InputIt first, InputIt last) { 
         m_ht.insert(first, last); 
     }
