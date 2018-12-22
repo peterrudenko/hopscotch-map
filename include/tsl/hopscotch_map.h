@@ -497,6 +497,8 @@ public:
     
     const_iterator find(const Key& key) const { return m_ht.find(key); }
     
+    bool contains(const Key& key) const { return m_ht.find(key) != m_ht.cend(); }
+
     /**
      * @copydoc find(const Key& key, std::size_t precalculated_hash)
      */
